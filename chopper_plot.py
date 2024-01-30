@@ -126,7 +126,7 @@ def main():
     # Add a 'toff' column based on the 'parameters' column
     grouped_results['toff'] = grouped_results['parameters'].apply(lambda x: int(x.split('_')[2].split('=')[1]))
 
-    grouped_results_csv_path = os.path.join(RESULTS_FOLDER,f'grouped_median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor})_{current_date}.csv')
+    grouped_results_csv_path = os.path.join(RESULTS_FOLDER,f'grouped_median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
     grouped_results.to_csv(grouped_results_csv_path, index=False)
 
     print(f'Saved grouped results to: {grouped_results_csv_path}')

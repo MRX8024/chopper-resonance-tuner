@@ -49,7 +49,7 @@ cfg_name=chopper_tune.cfg
 prcfg_path=~/printer_data/config/printer.cfg
 # Добавление строки [include] в printer.cfg
 if [ -f "$prcfg_path" ]; then
-    if ! grep -q "^\[include $s_folder/$repo/$cfg_name\]$" "$prcfg_path"; then
+    if ! grep -q "^\[include ${s_folder##*/}/$repo/$cfg_name\]$" "$prcfg_path"; then
         sudo service klipper stop
         sed -i "1i\[include ${s_folder##*/}/$repo/$cfg_name]" "$prcfg_path"
         echo "Including $cfg_name to $prcfg_path successfully complete"

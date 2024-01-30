@@ -18,4 +18,5 @@ type: git_repo
 path: ~/printer_data/config/scripts/chopper-resonance-tuner
 origin: https://github.com/MRX8024/chopper-resonance-tuner.git
 is_system_service: False
+managed_services: klipper
 ```

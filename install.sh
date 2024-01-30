@@ -83,6 +83,7 @@ if [ -f "$blk_path" ]; then
           sed -i "\$a path: $s_folder/$repo" "$blk_path"
           sed -i "\$a origin: https://github.com/MRX8024/chopper-resonance-tuner.git" "$blk_path"
           sed -i "\$a is_system_service: False" "$blk_path"
+          sed -i "\$a managed_services: klipper" "$blk_path"
           echo "Including [update_manager] to $blk_path successfully complete"
           sudo service moonraker start
         else

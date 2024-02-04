@@ -1,9 +1,7 @@
-1. Upload the repository to the host at ~/Chopper-tuning-guide
-2. Unpack it - `unzip ~/Chopper-tuning-guide.zip -d ~/Chopper-tuning-guide`
-3. Create a dir to export files, default is `mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
-4. Create a dir to store the handler and place it in it - `mkdir ~/printer_data/config/scripts & cp ~/Chopper-tuning-guide/chopper_plot.py ~/printer_data/config/scripts/chopper_plot.py`
-5. Move the macros to the printer configuration directory `cp ~/Chopper-tuning-guide/chopper_tune.cfg ~/printer_data/config/chopper_tune.cfg`
-6. Install via kiauh, or move the gcode_shell_command.py module in the klipper - `cp ~/Chopper-tuning-guide/gcode_shell_command.py ~/klipper/klippy/extras/gcode_shell_command.py`
+1. Create a folder for the output files, by default - `sudo mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
+2. Create a folder to store the program, and after downloading, move it - `sudo mkdir ~/printer_data/config/scripts & git clone https://github.com/MRX8024/chopper-resonance-tuner`
+3. Give permissions to run files - `sudo chmod +x ~/printer_data/config/scripts/chopper-resonance-tuner/*`
+4. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp ~/printer_data/config/scripts/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/gcode_shell_command.py`
 7. Add lines to the configuration -
 ```
 [reply]

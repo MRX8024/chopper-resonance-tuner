@@ -3,6 +3,12 @@ repo=chopper-resonance-tuner
 repo_path=~/chopper-resonance-tuner/
 script_name=chopper_plot.py
 
+# Сворачивание от root
+if [ "$(id -u)" = "0" ]; then
+    echo "Script must run from non-root !!!"
+    exit
+fi
+
 r_folder=~/printer_data/config/adxl_results/chopper_magnitude
 if [ ! -d "$r_folder" ]; then # Проверка папки chopper_magnitude & создание
     mkdir -p "$r_folder"
@@ -10,22 +16,22 @@ if [ ! -d "$r_folder" ]; then # Проверка папки chopper_magnitude & 
 fi
 
 s_folder=~/printer_data/config/scripts
-# Перемещение директории
+# Перемещение репозитория
 if [ ! -d "$s_folder" ]; then # Проверка папки scripts & создание
     mkdir -p "$s_folder"
 fi
-if [ -f "$s_folder/chopper-resonance-tuner" ]; then # Проверка папки в папке
-    read -p "$repo already exists in $s_folder. Do you want to overwrite it? (y/n): " answer
+if [ -f "$s_folder/$repo/$script_name" ]; then # Проверка папки в папке
+    read -p "Folder $repo already exists in $s_folder. Do you want to overwrite it? (y/n): " answer
     if [ "$answer" != "${answer#[Yy]}" ]; then
-        cp -r $repo_path "$s_folder/$repo" # Перезапись
-        chmod +x "$s_folder/$repo/"
-        echo "Copying $repo to $s_folder successfully complete"
+        sudo cp -r $repo_path "$s_folder/$repo" # Перезапись
+        sudo chmod +x $s_folder/$repo/*
+        # echo "Copying $repo to $s_folder successfully complete"
     else
         echo "Copying $repo aborted"
     fi
 else
-    cp -r $repo_path "$s_folder/$repo" # Копирование
-    echo "Copying $repo to $s_folder successfully complete"
+    sudo cp -r $repo_path "$s_folder/$repo" # Копирование
+    # echo "Copying $repo to $s_folder successfully complete"
 fi
 
 g_shell_folder=~/klipper/klippy/extras/
@@ -34,14 +40,14 @@ g_shell_name=gcode_shell_command.py
 if [ -f "$g_shell_folder/$g_shell_name" ]; then # Проверка файла в папке
     read -p "File $g_shell_name already exists in $g_shell_folder. Do you want to overwrite it? (y/n): " answer
     if [ "$answer" != "${answer#[Yy]}" ]; then
-        cp $repo"$g_shell_name" "$g_shell_folder" # Перезапись
-        chmod +x "$g_shell_folder/$g_shell_name"
-        echo "Copying $g_shell_name to $g_shell_folder successfully complete"
+        sudo cp "$repo/$g_shell_name" "$g_shell_folder" # Перезапись
+        sudo chmod +x $g_shell_folder/$g_shell_name
+        # echo "Copying $g_shell_name to $g_shell_folder successfully complete"
     else
         echo "Copying $g_shell_name aborted"
     fi
 else
-    cp $repo"$g_shell_name" "$g_shell_folder" # Копирование
+    sudo cp $repo"$g_shell_name" "$g_shell_folder" # Копирование
     echo "Copying $g_shell_name to $g_shell_folder successfully complete"
 fi
 
@@ -52,7 +58,7 @@ if [ -f "$prcfg_path" ]; then
     if ! grep -q "^\[include ${s_folder##*/}/$repo/$cfg_name\]$" "$prcfg_path"; then
         sudo service klipper stop
         sed -i "1i\[include ${s_folder##*/}/$repo/$cfg_name]" "$prcfg_path"
-        echo "Including $cfg_name to $prcfg_path successfully complete"
+        # echo "Including $cfg_name to $prcfg_path successfully complete"
         sudo service klipper start
     else
         echo "Including $cfg_name aborted, $cfg_name already exists in $prcfg_path"
@@ -63,7 +69,7 @@ if [ -f "$prcfg_path" ]; then
     if ! grep -q "^\[respond\]$" "$prcfg_path"; then
         sudo service klipper stop
         sed -i "1i\[respond]" "$prcfg_path"
-        echo "Including [respond] to $prcfg_path successfully complete"
+        # echo "Including [respond] to $prcfg_path successfully complete"
         sudo service klipper start
     else
         echo "Including [respond] aborted, [respond] already exists in $prcfg_path"
@@ -84,7 +90,7 @@ if [ -f "$blk_path" ]; then
           sed -i "\$a origin: https://github.com/MRX8024/chopper-resonance-tuner.git" "$blk_path"
           sed -i "\$a is_system_service: False" "$blk_path"
           sed -i "\$a managed_services: klipper" "$blk_path"
-          echo "Including [update_manager] to $blk_path successfully complete"
+          # echo "Including [update_manager] to $blk_path successfully complete"
           sudo service moonraker start
         else
           echo "Installing updater aborted"
@@ -96,15 +102,8 @@ fi
 
 sudo apt update
 sudo apt-get install libopenblas-dev
-sudo pip install -r "$repo_path"/wiki/requirements.txt
+sudo pip install -r "$repo_path"wiki/requirements.txt
 
 # Удаление директории репозитория
 sudo rm -rf ~/chopper-resonance-tuner
 echo "Temp repository was removed"
-
-# Заключение
-if [ $? -eq 0 ]; then
-    echo "Well done successfully"
-else
-    echo "Error on installation"
-fi

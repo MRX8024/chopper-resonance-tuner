@@ -2,13 +2,14 @@
 ####################################
 ###### CHOPPER REGISTERS TUNE ######
 ####################################
-# Written by @altzbox @mrx8024 #
+# Written by @altzbox @mrx8024
 # @version: 1.1
 
 # CHANGELOG:
 #   v1.0: first version of the script, data sort, collection, graph generation
 #   v1.1: add support any accelerometers, find vibr mode, smart work area, auto-install,
-#   auto-import export, out nametags(acc+drv+sr+date), cleaner data,
+#   auto-import export, out nametags(acc+drv+sr+date), cleaner data
+#   v1.2: rethinking motion calculation & measurements
 
 # These changes describe the operation of the entire system, not a specific file.
 
@@ -24,7 +25,6 @@ import sys
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-import argparse
 import plotly.express as px
 import plotly.offline as pyo
 from natsort import natsorted
@@ -116,8 +116,8 @@ def main():
         results.append({'file_name': csv_file, 'median_magnitude': median_magnitude, 'parameters': parameters, 'toff': current_toff})
 
     results_df = pd.DataFrame(results)
-    results_csv_path = os.path.join(RESULTS_FOLDER,f'median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
-    results_df.to_csv(results_csv_path, index=False)
+    # results_csv_path = os.path.join(RESULTS_FOLDER,f'median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
+    # results_df.to_csv(results_csv_path, index=False)
 
     grouped_results = results_df.groupby('parameters')['median_magnitude'].mean().reset_index()
     sorted_indices = natsorted(range(len(grouped_results)), key=lambda i: grouped_results['parameters'].iloc[i])
@@ -126,10 +126,9 @@ def main():
     # Add a 'toff' column based on the 'parameters' column
     grouped_results['toff'] = grouped_results['parameters'].apply(lambda x: int(x.split('_')[2].split('=')[1]))
 
-    grouped_results_csv_path = os.path.join(RESULTS_FOLDER,f'grouped_median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
-    grouped_results.to_csv(grouped_results_csv_path, index=False)
-
-    print(f'Saved grouped results to: {grouped_results_csv_path}')
+    # grouped_results_csv_path = os.path.join(RESULTS_FOLDER,f'grouped_median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
+    # grouped_results.to_csv(grouped_results_csv_path, index=False)
+    # print(f'Saved grouped results to: {grouped_results_csv_path}')
 
     toff_colors = ['#12B57F', '#9DB512', '#DF8816', '#1297B5', '#5912B5', '#B51284', '#127D0C', '#DC143C', '#2F4F4F']
 

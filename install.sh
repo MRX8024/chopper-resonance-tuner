@@ -110,7 +110,7 @@ sudo apt update
 sudo apt-get install libopenblas-dev
 sudo pip install -r "$repo_path"wiki/requirements.txt
 
-sudo chmod -R +x "$repo_path/"
+sudo chmod -R +x "$repo_path"
 
 # Удаление директории репозитория
 #sudo rm -rf ~/chopper-resonance-tuner

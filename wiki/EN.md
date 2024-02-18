@@ -5,6 +5,8 @@
 The Klipper firmware provides powerful capabilities for controlling 3D printers, however, in order to achieve maximum performance and proper operation of such an important component as the “drive”, careful tuning of stepper motor control parameters is required.
 Our project was created to provide you with guidance on optimizing driver parameters for various types of steppers.
 
+### Currently the program supports the following kinematics: `CoreXY / HBOT`
+
 ## Introduction
 Why is it needed?
 First you need to know that there are at least 2 “main” registers, these are none other than TBL (Comparator blank time) and TOFF (Turn-Off Time), they are both responsible for turning off and supplying power to the mosfets, which in turn open to motor windings, thereby affecting the loss of currents. Based on this little context,

@@ -1,11 +1,11 @@
 1. Создайте папку для выходных файлов, по умолчанию - `sudo mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
-2. Создайте папку для хранения программы, и скачав переместите ее туда - `sudo mkdir ~/printer_data/config/scripts & git clone https://github.com/MRX8024/chopper-resonance-tuner`
-3. Дайте разрешения на запуск файлов - sudo `chmod +x ~/printer_data/config/scripts/chopper-resonance-tuner/*`
-4. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp ~/printer_data/config/scripts/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/gcode_shell_command.py`
+2. Скачайте репозиторий - `sudo git clone https://github.com/MRX8024/chopper-resonance-tuner`
+3. Дайте разрешения на запуск файлов - `sudo chmod -R +x ~/chopper-resonance-tuner/`
+4. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
 5. Добавьте в конфигурацию принтера строки - 
 ```
 [respond]
-[include scripts/chopper-resonance-tuner/chopper_tune.cfg]
+[include chopper_tune.cfg]
 ```
 Если вы использовали НЕ стандартные пути, не забудьте поправить их в `chopper_plot.py`, `[gcode_shell_command chop_tune] в chopper_tune.cfg`
 
@@ -13,7 +13,7 @@
 ```
 [update_manager chopper-resonance-tuner]
 type: git_repo
-path: ~/printer_data/config/scripts/chopper-resonance-tuner
+path: ~/chopper-resonance-tuner
 origin: https://github.com/MRX8024/chopper-resonance-tuner.git
 is_system_service: False
 managed_services: klipper

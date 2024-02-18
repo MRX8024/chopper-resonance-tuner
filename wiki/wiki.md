@@ -13,4 +13,3 @@
 ## TMC 5160 [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/TMC5160A_datasheet_rev1.17.pdf) Klipper configuration [wiki](https://www.klipper3d.org/Config_Reference.html#tmc5160)
 
 ## Back to [Main](/wiki/EN.md)
-## На [Главную](/wiki/RU.md)

@@ -15,8 +15,8 @@
 
 import os
 #################################################################################################################
-# RESULTS_FOLDER = 'Z:/Chopper-tuning-guide/pythonProject/adxl_results/chopper_magnitude'
-# DATA_FOLDER = 'Z:/Chopper-tuning-guide/pythonProject'
+# RESULTS_FOLDER = 'Z:/chopper-resonance-tuner/pythonProject/adxl_results/chopper_magnitude'
+# DATA_FOLDER = 'Z:/chopper-resonance-tuner/pythonProject'
 RESULTS_FOLDER = os.path.expanduser('~/printer_data/config/adxl_results/chopper_magnitude')
 DATA_FOLDER = '/tmp'
 #################################################################################################################
@@ -89,10 +89,11 @@ def main():
                 for hstrt in range(args.get('min_hstrt'), args.get('max_hstrt') + 1):
                     for hend in range(args.get('min_hend'), args.get('max_hend') + 1):
                         if hstrt + hend <= args.get('hstrt_hend_max'):
-                            for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
-                                for _ in range(args.get('iterations')):
-                                    parameters = f"current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}_hend={hend}_speed={speed}"
-                                    parameters_list.append(parameters)
+                            for tpfd in range(args.get('min_tpfd'), args.get('max_tpfd') + 1):
+                                for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
+                                    for _ in range(args.get('iterations')):
+                                        parameters = f"current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}_hend={hend}_tpfd={tpfd}_speed={speed}"
+                                        parameters_list.append(parameters)
 
     if len(csv_files) != len(parameters_list):
         print(f"Warning: The number of CSV files ({len(csv_files)}) does not match the expected number of combinations based on the provided parameters ({len(parameters_list)}).")

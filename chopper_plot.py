@@ -3,7 +3,7 @@
 ###### CHOPPER REGISTERS TUNE ######
 ####################################
 # Written by @altzbox @mrx8024
-# @version: 1.1
+# @version: 1.2
 
 # CHANGELOG:
 #   v1.0: first version of the script, data sort, collection, graph generation
@@ -86,10 +86,10 @@ def main():
     for current in range(args.get('current_min_ma'), args.get('current_max_ma') + 1, args.get('current_change_step')):
         for tbl in range(args.get('tbl_min'), args.get('tbl_max') + 1):
             for toff in range(args.get('toff_min'), args.get('toff_max') + 1):
-                for hstrt in range(args.get('min_hstrt'), args.get('max_hstrt') + 1):
-                    for hend in range(args.get('min_hend'), args.get('max_hend') + 1):
+                for hstrt in range(args.get('hstrt_min'), args.get('hstrt_max') + 1):
+                    for hend in range(args.get('hend_min'), args.get('hend_max') + 1):
                         if hstrt + hend <= args.get('hstrt_hend_max'):
-                            for tpfd in range(args.get('min_tpfd'), args.get('max_tpfd') + 1):
+                            for tpfd in range(args.get('tpfd_min'), args.get('tpfd_max') + 1):
                                 for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
                                     for _ in range(args.get('iterations')):
                                         parameters = f"current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}_hend={hend}_tpfd={tpfd}_speed={speed}"

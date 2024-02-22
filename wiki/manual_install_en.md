@@ -1,8 +1,9 @@
 1. Create a folder for the output files, by default - `sudo mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
 2. Download a program - `sudo git clone https://github.com/MRX8024/chopper-resonance-tuner`
-3. Give permissions to run files - `sudo chmod -R +x ~/chopper-resonance-tuner/`
-4. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
-7. Add lines to the configuration -
+3. Create a link to the program - `ln -sf ~/chopper-resonance-tuner/chopper_tune.cfg ~/printer_data/config/`
+4. Give permissions to run files - `sudo chmod -R +x ~/chopper-resonance-tuner/`
+5. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
+6. Add lines to the configuration -
 ```
 [respond]
 [include chopper_tune.cfg]
@@ -13,8 +14,9 @@ You can also optionally add an update section to moonraker for subsequent update
 ```
 [update_manager chopper-resonance-tuner]
 type: git_repo
-path: ~/chopper-resonance-tuner
+path: ~/chopper-resonance-tuner/
 origin: https://github.com/MRX8024/chopper-resonance-tuner.git
+primary_branch: main
 is_system_service: False
 managed_services: klipper
 ```

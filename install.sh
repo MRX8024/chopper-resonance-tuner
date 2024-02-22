@@ -12,7 +12,7 @@ fi
 result_folder=~/printer_data/config/adxl_results/chopper_magnitude
 if [ ! -d "$result_folder" ]; then # Проверка папки chopper_magnitude & создание
     mkdir -p "$result_folder"
-    echo "Make $result_folder direction successfully complete"
+    # echo "Make $result_folder direction successfully complete"
 fi
 
 #s_folder=~/printer_data/config/scripts
@@ -48,8 +48,8 @@ if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в �
 #        echo "Copying $g_shell_name aborted"
 #    fi
 else
-    sudo cp $repo"$g_shell_name" "$g_shell_path" # Копирование
-    echo "Copying $g_shell_name to $g_shell_path successfully complete"
+    sudo cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
+    # echo "Copying $g_shell_name to $g_shell_path successfully complete"
     sudo chmod +x "$g_shell_path/$g_shell_name"
 fi
 
@@ -85,15 +85,16 @@ fi
 blk_path=~/printer_data/config/moonraker.conf
 # Добавление блока обновления в moonraker.conf
 if [ -f "$blk_path" ]; then
-    if ! grep -q "^\[update_manager chopper-resonance-tuner\]$" "$blk_path"; then
+    if ! grep -q "^\[update_manager $repo\]$" "$blk_path"; then
         read -p " Do you want to install updater? (y/n): " answer
         if [ "$answer" != "${answer#[Yy]}" ]; then
           sudo service moonraker stop
           sed -i "\$a \ " "$blk_path"
-          sed -i "\$a [update_manager chopper-resonance-tuner]" "$blk_path"
+          sed -i "\$a [update_manager $repo]" "$blk_path"
           sed -i "\$a type: git_repo" "$blk_path"
           sed -i "\$a path: $repo_path" "$blk_path"
           sed -i "\$a origin: https://github.com/MRX8024/$repo.git" "$blk_path"
+          sed -i "\$a primary_branch: main" "$blk_path"
           sed -i "\$a is_system_service: False" "$blk_path"
           sed -i "\$a managed_services: klipper" "$blk_path"
           # echo "Including [update_manager] to $blk_path successfully complete"
@@ -109,7 +110,6 @@ fi
 sudo apt update
 sudo apt-get install libopenblas-dev
 sudo pip install -r "$repo_path"wiki/requirements.txt
-
 sudo chmod -R +x "$repo_path"
 
 # Удаление директории репозитория

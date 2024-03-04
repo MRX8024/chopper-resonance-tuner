@@ -109,7 +109,7 @@ fi
 
 sudo chmod -R +x $repo_path
 sudo apt update
-sudo apt-get install libopenblas-dev
+sudo apt-get install libatlas-base-dev libopenblas-dev
 sudo pip install -r "$repo_path/"wiki/requirements.txt
 
 # Удаление директории репозитория

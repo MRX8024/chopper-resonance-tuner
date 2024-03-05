@@ -1,7 +1,6 @@
 #!/bin/bash
 repo=chopper-resonance-tuner
 repo_path=~/chopper-resonance-tuner/
-script_name=chopper_plot.py
 
 # Сворачивание от root
 if [ "$(id -u)" = "0" ]; then
@@ -15,38 +14,11 @@ if [ ! -d "$result_folder" ]; then # Проверка папки chopper_magnitu
     # echo "Make $result_folder direction successfully complete"
 fi
 
-#s_folder=~/printer_data/config/scripts
-## Перемещение репозитория
-#if [ ! -d "$s_folder" ]; then # Проверка папки scripts & создание
-#    mkdir -p "$s_folder"
-#fi
-#if [ -f "$s_folder/$repo/$script_name" ]; then # Проверка папки в папке
-#    read -p "Folder $repo already exists in $s_folder. Do you want to overwrite it? (y/n): " answer
-#    if [ "$answer" != "${answer#[Yy]}" ]; then
-#        sudo cp -r $repo_path "$s_folder" # Перезапись
-#        # echo "Copying $repo to $s_folder successfully complete"
-#    else
-#        echo "Copying $repo aborted"
-#    fi
-#else
-#    sudo cp -r $repo_path "$s_folder/$repo" # Копирование
-#    # echo "Copying $repo to $s_folder successfully complete"
-#fi
-#sudo chmod -R +x "$s_folder/"
-
 g_shell_path=~/klipper/klippy/extras/
 g_shell_name=gcode_shell_command.py
 # Перемещение gcode_shell_command.py
 if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в папке
      echo "Including $g_shell_name aborted, $g_shell_name already exists in $g_shell_path"
-#    read -p "File $g_shell_name already exists in $g_shell_path. Do you want to overwrite it? (y/n): " answer
-#    if [ "$answer" != "${answer#[Yy]}" ]; then
-#        sudo cp "$repo/$g_shell_name" "$g_shell_path" # Перезапись
-#        sudo chmod +x "$g_shell_path/$g_shell_name"
-#        # echo "Copying $g_shell_name to $g_shell_path successfully complete"
-#    else
-#        echo "Copying $g_shell_name aborted"
-#    fi
 else
     sudo cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
     # echo "Copying $g_shell_name to $g_shell_path successfully complete"
@@ -107,11 +79,6 @@ if [ -f "$blk_path" ]; then
     fi
 fi
 
-sudo chmod -R +x $repo_path
 sudo apt update
 sudo apt-get install libatlas-base-dev libopenblas-dev
 sudo pip install -r "$repo_path/"wiki/requirements.txt
-
-# Удаление директории репозитория
-#sudo rm -rf ~/chopper-resonance-tuner
-#echo "Temp repository was removed"

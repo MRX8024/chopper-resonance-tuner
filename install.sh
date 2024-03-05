@@ -22,7 +22,6 @@ if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в �
 else
     sudo cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
     # echo "Copying $g_shell_name to $g_shell_path successfully complete"
-    sudo chmod +x "$g_shell_path/$g_shell_name"
 fi
 
 cfg_name=chopper_tune.cfg

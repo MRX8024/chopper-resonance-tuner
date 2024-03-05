@@ -3,7 +3,13 @@
 3. Create a link to the program - `ln -sf ~/chopper-resonance-tuner/chopper_tune.cfg ~/printer_data/config/`
 4. Give permissions to run files - `sudo chmod -R +x ~/chopper-resonance-tuner/`
 5. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
-6. Add lines to the configuration -
+6. Install packages -
+
+``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
+
+``` sudo pip install ``` pandas, numpy, tqdm, plotly, natsort, matplotlib, pyarrow
+
+7. Add lines to the configuration -
 ```
 [respond]
 [include chopper_tune.cfg]

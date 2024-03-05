@@ -3,7 +3,13 @@
 3. Создайте ссылку к программе - `ln -sf ~/chopper-resonance-tuner/chopper_tune.cfg ~/printer_data/config/`
 4. Дайте разрешения на запуск файлов - `sudo chmod -R +x ~/chopper-resonance-tuner/`
 5. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
-6. Добавьте в конфигурацию принтера строки - 
+6. Установите пакеты -
+
+``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
+
+``` sudo pip install ``` pandas, numpy, tqdm, plotly, natsort, matplotlib, pyarrow
+
+7. Добавьте в конфигурацию принтера строки - 
 ```
 [respond]
 [include chopper_tune.cfg]

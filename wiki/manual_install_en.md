@@ -23,6 +23,5 @@ type: git_repo
 path: ~/chopper-resonance-tuner/
 origin: https://github.com/MRX8024/chopper-resonance-tuner.git
 primary_branch: main
-is_system_service: False
 managed_services: klipper
 ```

@@ -7,10 +7,12 @@
    git clone https://github.com/MRX8024/chopper-resonance-tuner
    bash ~/chopper-resonance-tuner/install.sh
 ```
-If everything went well, you will see folder - 'adxl_results' in your printer home directory (printer configuration), into which the calibration results will be placed, as well as an already available macro from the macro panel on the main page of the Fluidd / Mainsail.
+If everything went well, you will see folder - `adxl_results` in your printer home directory (printer configuration), into which the calibration results will be placed, as well as an already available macro from the macro panel on the main page of the Fluidd / Mainsail.
 And if for some reason not, then install [manually](/wiki/manual_install_en.md).
 
-2. Connect the accelerometer to the print head / bed , depending on the type of printer, such as when measuring resonances for input_shaper, to collect vibrations.
+2. Сonnect the accelerometer to the motor by screwing it in, this guarantees accurate vibration measurement.
+   However, it is possible to connect, as for example when measuring resonances, for input_shaper - to the print head / bed, depending on the type of printer, to collect vibrations.
+   This method may give incorrect data if the mechanics are crooked, but on properly assembled printers, it is not inferior to the first.
 
 3. Calibration: (Further commands in this article will be interpreted with the minimum required parameters, all supported are listed at the bottom of the manual).
 
@@ -39,7 +41,8 @@ And if for some reason not, then install [manually](/wiki/manual_install_en.md).
 
    5. You can repeat the procedure with smaller variations of the chopper, for example, only `TBL=0` and `TOFF=8` and iterate over the full ranges of `HSTRT` and `HEND`, but with more repetitions of `ITERATIONS`. In this case, the graph will be based on average results to reduce the influence of mechanics on the readings.
    6. If you are the lucky owner of a TMC2240 or TMC5160, then after setting all of the above registers, you have the opportunity to configure another parameter called `TPFD`.
-   It is responsible for damping the average resonances of the motor, and has a value range of `0-15`. Set its parameter value to `driver_TPFD: 0`, or calibrate it. The command with the data registers found above, two `ITERATIONS` - for greater accuracy, and resonant speed looks like this - `CHOPPER_TUNE TBL_MIN=0 TBL_MAX=0 TOFF_MIN=8 TOFF_MAX=5 HSTRT_MIN=5 HSTRT_MAX=5 HEND_MIN=5 HEND_MAX=5 TPFD_MIN=0 TPFD_MAX=15 MIN_SPEED=55 MAX_SPEED=55 ITERATIONS=2`
+   It is responsible for damping the average resonances of the motor, and has a value range of `0-15`. Set its parameter value to `driver_TPFD: 0`, or calibrate it.
+   The command with the data registers found above, two `ITERATIONS` - for greater accuracy, and resonant speed looks like this - `CHOPPER_TUNE TBL_MIN=0 TBL_MAX=0 TOFF_MIN=8 TOFF_MAX=8 HSTRT_MIN=5 HSTRT_MAX=5 HEND_MIN=5 HEND_MAX=5 TPFD_MIN=0 TPFD_MAX=15 MIN_SPEED=55 MAX_SPEED=55 ITERATIONS=2`
 
 
 Description of the program functionality -

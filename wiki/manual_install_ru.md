@@ -7,7 +7,7 @@
 
 ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-``` sudo pip install ``` pandas, numpy, tqdm, plotly, natsort, matplotlib, pyarrow
+``` sudo pip install ``` numpy, plotly, matplotlib
 
 7. Добавьте в конфигурацию принтера строки - 
 ```

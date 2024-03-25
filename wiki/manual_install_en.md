@@ -1,9 +1,8 @@
 1. Create a folder for the output files, by default - `sudo mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
 2. Download a program - `sudo git clone https://github.com/MRX8024/chopper-resonance-tuner`
 3. Create a link to the program - `ln -sf ~/chopper-resonance-tuner/chopper_tune.cfg ~/printer_data/config/`
-4. Give permissions to run files - `sudo chmod -R +x ~/chopper-resonance-tuner/`
-5. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
-6. Install packages -
+4. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
+5. Install packages -
 
 ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 

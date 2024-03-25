@@ -1,9 +1,8 @@
 1. Создайте папку для выходных файлов, по умолчанию - `sudo mkdir ~/printer_data/config/adxl_results/chopper_magnitude`
 2. Скачайте репозиторий - `sudo git clone https://github.com/MRX8024/chopper-resonance-tuner`
 3. Создайте ссылку к программе - `ln -sf ~/chopper-resonance-tuner/chopper_tune.cfg ~/printer_data/config/`
-4. Дайте разрешения на запуск файлов - `sudo chmod -R +x ~/chopper-resonance-tuner/`
-5. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
-6. Установите пакеты -
+4. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
+5. Установите пакеты -
 
 ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 

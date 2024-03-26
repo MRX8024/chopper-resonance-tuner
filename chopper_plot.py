@@ -24,7 +24,7 @@ DATA_FOLDER = '/tmp'
 import sys
 import csv
 import numpy as np
-import plotly.express as px
+import plotly.graph_objects as go
 import plotly.io as pio
 from datetime import datetime
 
@@ -136,14 +136,16 @@ def main():
             writer.writerow({key: value for key, value in result.items() if key != 'color'})
 
     # Graphs generation
-    colors = ['#12B57F', '#9DB512', '#DF8816', '#1297B5', '#5912B5', '#B51284', '#127D0C', '#DC143C', '#2F4F4F']
+    colors = ['', '#2F4F4F', '#12B57F', '#9DB512', '#DF8816', '#1297B5', '#5912B5', '#B51284', '#127D0C']
     params = [results, sorted(results, key=lambda x: x['median magnitude'])]
     names = ['', 'sorted_']
     for param, name in zip(params, names):
-        fig = px.bar(param, x='median magnitude', y='parameters', title='Median Magnitude vs Parameters',
-         color='color', color_continuous_scale=colors, color_continuous_midpoint=None, orientation='h')
-        fig.update_layout(xaxis_title='Median Magnitude', yaxis_title='Parameters', coloraxis_showscale=False)
-        fig.update_traces(textposition='outside')
+        fig = go.Figure()
+        for entry in param:
+            fig.add_trace(go.Bar(x=[entry['median magnitude']], y=[entry['parameters']], marker_color =
+             colors[entry['color'] if entry['color'] <= 8 else entry['color'] - 8], orientation='h', showlegend=False))
+        fig.update_layout(title='Median Magnitude vs Parameters', xaxis_title='Median Magnitude',
+         yaxis_title='Parameters', coloraxis_showscale=True)
         plot_html_path = os.path.join(RESULTS_FOLDER, f'{name}interactive_plot_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.html')
         pio.write_html(fig, plot_html_path, auto_open=False)
         if int(parameters_list[0].split('_')[6].split('=')[1]) != int(parameters_list[1].split('_')[6].split('=')[1]):

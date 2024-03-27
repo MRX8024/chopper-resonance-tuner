@@ -15,8 +15,6 @@
 
 import os
 #################################################################################################################
-# RESULTS_FOLDER = 'Z:/chopper-resonance-tuner/chopper-resonance-tuner/adxl_results/chopper_magnitude'
-# DATA_FOLDER = 'Z:/chopper-resonance-tuner/chopper-resonance-tuner/tmp/fields'
 RESULTS_FOLDER = os.path.expanduser('~/printer_data/config/adxl_results/chopper_magnitude')
 DATA_FOLDER = '/tmp'
 #################################################################################################################
@@ -110,6 +108,7 @@ def main():
 
     # Binding magnitude on registers
     results = []
+    tmp_list = [{}]
     static = calculate_static_measures(os.path.join(DATA_FOLDER, target_file))
     for csv_file, parameters in zip(csv_files, parameters_list):
         file_path = os.path.join(DATA_FOLDER, csv_file)
@@ -125,15 +124,23 @@ def main():
         magnitudes = [np.sqrt(float(row['accel_x']) ** 2 + float(row['accel_y']) ** 2 + float(row['accel_z']) ** 2) for row in data]
         md_magnitude = np.median(magnitudes)
         toff = int(parameters.split('_')[2].split('=')[1])
-        results.append({'file_name': csv_file, 'median magnitude': md_magnitude, 'parameters': parameters, 'color': toff})
+        if tmp_list[0].get('parameters') == parameters:
+            tmp_list[0]['median magnitude'] = (tmp_list[0].get('median magnitude', 0) + md_magnitude) / 2
+        else:
+            if tmp_list[0] == {}:
+                tmp_list[0] = {'file_name': csv_file, 'median magnitude': md_magnitude, 'parameters': parameters,'color': toff}
+                continue
+            else:
+                results.append(tmp_list[0])
+                tmp_list[0] = {'file_name': csv_file, 'median magnitude': md_magnitude, 'parameters': parameters, 'color': toff}
 
     # Group result in csv
-    results_csv_path = os.path.join(RESULTS_FOLDER,f'median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
-    with open(results_csv_path, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=['file_name', 'median magnitude', 'parameters'])
-        writer.writeheader()
-        for result in results:
-            writer.writerow({key: value for key, value in result.items() if key != 'color'})
+    # results_csv_path = os.path.join(RESULTS_FOLDER,f'median_magnitudes_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.csv')
+    # with open(results_csv_path, 'w', newline='') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=['file_name', 'median magnitude', 'parameters'])
+    #     writer.writeheader()
+    #     for result in results:
+    #         writer.writerow({key: value for key, value in result.items() if key != 'color'})
 
     # Graphs generation
     colors = ['', '#2F4F4F', '#12B57F', '#9DB512', '#DF8816', '#1297B5', '#5912B5', '#B51284', '#127D0C']

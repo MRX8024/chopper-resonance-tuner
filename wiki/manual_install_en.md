@@ -4,9 +4,9 @@
 4. Install via kiauh, or move the gcode_shell_command.py module from repo to the klipper - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
 5. Install packages -
 
-``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
+    ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-``` sudo pip install ``` numpy, plotly, matplotlib
+    ``` sudo pip install numpy plotly matplotlib ```
 
 7. Add lines to the configuration -
 ```

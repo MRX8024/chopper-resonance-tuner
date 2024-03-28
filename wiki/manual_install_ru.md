@@ -4,9 +4,9 @@
 4. Установите через kiauh, либо переместите модуль gcode_shell_command.py из репозитория в клиппер - `cp -i ~/chopper-resonance-tuner/gcode_shell_command.py ~/klipper/klippy/extras/`
 5. Установите пакеты -
 
-``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
+    ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-``` sudo pip install ``` numpy, plotly, matplotlib
+    ``` sudo pip install numpy plotly matplotlib ```
 
 7. Добавьте в конфигурацию принтера строки - 
 ```

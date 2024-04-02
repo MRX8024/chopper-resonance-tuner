@@ -22,6 +22,7 @@ DATA_FOLDER = '/tmp'
 import sys
 import csv
 import numpy as np
+from tqdm import tqdm
 import plotly.graph_objects as go
 import plotly.io as pio
 from datetime import datetime
@@ -56,8 +57,7 @@ def calculate_static_measures(file_path):
     with open(file_path, 'r') as file:
         static = np.array([[float(row["accel_x"]),
                             float(row["accel_y"]),
-                            float(row["accel_z"])]
-                           for row in csv.DictReader(file)])
+                            float(row["accel_z"])] for row in csv.DictReader(file)])
         return static.mean(axis=0)
 
 
@@ -89,7 +89,8 @@ def main():
                                 for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
                                     for _ in range(iterations):
                                         freq = float(round(1/(2*(12+32*toff)*1/(1000000*fclk)+2*1/(1000000*fclk)*16*(1.5**tbl))/1000, 1))
-                                        parameters = f'current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}_hend={hend}_tpfd={tpfd}_speed={speed}_freq={freq}kHz'
+                                        parameters = (f'current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}'
+                                                      f'_hend={hend}_tpfd={tpfd}_speed={speed / 100}_freq={freq}kHz')
                                         parameters_list.append(parameters)
 
     # Check input count csvs
@@ -103,7 +104,7 @@ def main():
     results = []
     static = calculate_static_measures(os.path.join(DATA_FOLDER, target_file))
     datapoint = []
-    for csv_file, parameters in zip(csv_files, parameters_list):
+    for csv_file, parameters in tqdm(zip(csv_files, parameters_list), desc='Processing CSV files', total=len(csv_files)):
         file_path = os.path.join(DATA_FOLDER, csv_file)
         with open(file_path, 'r') as file:
             data = np.array([[float(row["accel_x"]),
@@ -143,7 +144,7 @@ def main():
                           yaxis_title='Parameters', coloraxis_showscale=True)
         plot_html_path = os.path.join(RESULTS_FOLDER, f'{name}interactive_plot_{accelerometer}_tmc{driver}_{sense_resistor}_{current_date}.html')
         pio.write_html(fig, plot_html_path, auto_open=False)
-        if int(parameters_list[0].split('_')[6].split('=')[1]) != int(parameters_list[1].split('_')[6].split('=')[1]):
+        if parameters_list[0].split('_')[6].split('=')[1] != parameters_list[1].split('_')[6].split('=')[1]:
             break
 
     # Export Info

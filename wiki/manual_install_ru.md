@@ -6,7 +6,7 @@
 
     ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-    ``` sudo pip install numpy plotly matplotlib ```
+    ``` sudo pip install numpy tqdm plotly matplotlib ```
 
 7. Добавьте в конфигурацию принтера строки - 
 ```

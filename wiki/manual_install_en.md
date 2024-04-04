@@ -6,14 +6,14 @@
 
     ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-    ``` sudo pip install numpy tqdm plotly matplotlib ```
+    ``` sudo pip install numpy plotly matplotlib pyserial ```
 
 7. Add lines to the configuration -
 ```
 [respond]
 [include chopper_tune.cfg]
 ```
-If you used NOT standard paths, be sure to edit them in `chopper_plot.py`, `[gcode_shell_commandhop_tune] in Chopper_tune.cfg`
+If you used NOT standard paths, be sure to edit them in `chopper_plot.py`, `chopper_plot.sh`, `[gcode_shell_commandhop_tune] in Chopper_tune.cfg`
 
 You can also optionally add an update section to moonraker for subsequent updates via Fluidd / Mainsail update managers.
 ```

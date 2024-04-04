@@ -5,7 +5,7 @@
 The Klipper firmware provides powerful capabilities for controlling 3D printers, however, in order to achieve maximum performance and proper operation of such an important component as the “drive”, careful tuning of stepper motor control parameters is required.
 Our project was created to provide you with guidance on optimizing driver parameters for various types of steppers.
 
-### Currently the program supports the following kinematics: `CoreXY / Hbot / Cartesian` `2/4 WD`
+### Currently the program supports the following kinematics: `CoreXY / Hbot / Cartesian` `2/4 WD` `E-axis`
 
 ## Introduction
 Why is it needed?

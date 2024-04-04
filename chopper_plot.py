@@ -90,7 +90,7 @@ def main():
                                     for _ in range(iterations):
                                         freq = float(round(1/(2*(12+32*toff)*1/(1000000*fclk)+2*1/(1000000*fclk)*16*(1.5**tbl))/1000, 1))
                                         parameters = (f'current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}'
-                                                      f'_hend={hend}_tpfd={tpfd}_speed={speed / 100}_freq={freq}kHz')
+                                                      f'_hend={hend}_tpfd={tpfd}_speed={speed}_freq={freq}kHz')
                                         parameters_list.append(parameters)
 
     # Check input count csvs

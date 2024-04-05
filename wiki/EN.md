@@ -12,14 +12,11 @@ Why is it needed?
  1. There are at least 2 "main" registers, these are none other than TBL (Comparator blank time) and TOFF (Turn-Off Time), they are both responsible for disconnecting and supplying power to the mosfets, which in turn open to the stepper motor windings, thereby affecting the loss of currents. Based on this small context, you can
     we can already conclude that by selecting the correct current control for our windings, we reduce interference, "extra" currents that interfere with the operation of the motor. That is, they knock down the angle of the rotor, vibrate, and the energy is simply transformed into heat, absorbed by the body, and this, in turn, means that the rotor torque is also lost.
  2. To summarize, of course stepper motors can be used on standard registers, but this is simply inefficient. Of course, it may happen that the standard registers will be optimal for your stepper, but this is unlikely.
-    After conducting research, we found out that the correct selection of motor control modes gives it up to 30% of the torque! As for heat dissipation, it decreases by ~15% in my case.(This test is very lengthy, I don't have any other feedback).
+    After conducting research, we found out that the correct selection of engine control modes gives it up to 30% torque, reduces vibrations up to 10 times. As for heat dissipation, it decreases by ~15% in my case. (This test is very lengthy, I don't have any other feedback).
  3. It is important to note that the registers are relevant only for a specific pair: `driver - motor`, and depend on the specific implementation of the driver. It is also worth considering that the characteristics of the motor, according to the manufacturer, have up to +-20% spread, as well as the measurement error, accelerometer, so you should not be surprised at the run-up of the parameters on different installations.
 
 ## Assistance
-We welcome contributions from the community! If you have experience and advice on tuning stepper motors, do not hesitate to share the material with us. Provide information about the tested stepper motors in the format (see below).
-```
-interactive_plot_accelerometer_stepper_driver_resistor_date.html
-```
+We welcome contributions from the community! If you have experience and advice on tuning stepper motors, do not hesitate to share the material with us. Provide information about the tested stepper motors.
 
 ### Further [instructions](/wiki/wiki.md), good luck!
 

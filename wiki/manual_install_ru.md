@@ -6,7 +6,7 @@
 
     ``` sudo apt-get install libatlas-base-dev libopenblas-dev ```
 
-    ``` sudo pip install numpy plotly matplotlib pyserial ```
+    ``` sudo pip install numpy plotly matplotlib serial ```
 
 7. Добавьте в конфигурацию принтера строки - 
 ```

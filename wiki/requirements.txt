@@ -1,4 +1,4 @@
 numpy>=1.26.3
 plotly>=5.18.0
 matplotlib>=3.8.2
-pyserial>=3.5
+serial>=3.5

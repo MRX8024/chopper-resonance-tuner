@@ -83,7 +83,7 @@ fi
 sudo apt update
 sudo apt-get install libatlas-base-dev libopenblas-dev
 # Reuse system libraries
-python -m venv --system-site-packages .venv
+python -m venv .venv
 source .venv/bin/activate
 
 pip install -r wiki/requirements.txt

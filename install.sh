@@ -20,7 +20,7 @@ g_shell_name=gcode_shell_command.py
 if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в папке
      echo "Including $g_shell_name aborted, $g_shell_name already exists in $g_shell_path"
 else
-    sudo cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
+    cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
     # echo "Copying $g_shell_name to $g_shell_path successfully complete"
 fi
 
@@ -79,4 +79,4 @@ fi
 
 sudo apt update
 sudo apt-get install libatlas-base-dev libopenblas-dev
-sudo pip install -r "$repo_path/"wiki/requirements.txt
+sudo apt-get install python3-tqdm python3-plotly python3-numpy python3-matplotlib

@@ -22,7 +22,7 @@ g_shell_name=gcode_shell_command.py
 if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в папке
     echo "Including $g_shell_name aborted, $g_shell_name already exists in $g_shell_path"
 else
-    ln -srf "$repo_path/$g_shell_name" $g_shell_path # symbol link
+    cp "$repo_path/$g_shell_name" $g_shell_path # copy
     # echo "Copying $g_shell_name to $g_shell_path successfully complete"
 fi
 

@@ -2,4 +2,4 @@
 script_path=$(realpath $(echo $0))
 repo_path=$(dirname ${script_path})
 source ${repo_path}/.venv/bin/activate
-python3 ${repo_path}/chopper_plot.py "$@"
+exec python3 ${repo_path}/chopper_plot.py "$@"

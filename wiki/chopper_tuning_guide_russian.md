@@ -5,6 +5,7 @@
 ```
    cd ~
    git clone https://github.com/MRX8024/chopper-resonance-tuner
+   cd chopper-resonance-tuner/
    bash ~/chopper-resonance-tuner/install.sh
 ```
 Если все прошло успешно, вы увидите у себя в домашней директории принтера (конфигурации принтера) появившуюся папку - `adxl_results`, в которую после будут помещаться результаты калибровок, а так же уже доступный макрос из панели макросов на главной странице веб интерфейса.

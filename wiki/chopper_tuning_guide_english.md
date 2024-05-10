@@ -5,6 +5,7 @@
 ```
    cd ~
    git clone https://github.com/MRX8024/chopper-resonance-tuner
+   cd chopper-resonance-tuner/
    bash ~/chopper-resonance-tuner/install.sh
 ```
 If everything went well, you will see folder - `adxl_results` in your printer home directory (printer configuration), into which the calibration results will be placed, as well as an already available macro from the macro panel on the main page of the Fluidd / Mainsail.

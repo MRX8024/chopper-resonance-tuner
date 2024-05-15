@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
-####################################
-###### CHOPPER REGISTERS TUNE ######
-####################################
-# Written by @altzbox @mrx8024
-# @version: 1.2
-
-# CHANGELOG:
-#   v1.0: first version of the script, data sort, collection, graph generation
-#   v1.1: add support any accelerometers, find vibr mode, smart work area, auto-install,
-#   auto-import export, out nametags(acc+drv+sr+date), cleaner data
-#   v1.2: rethinking motion calculation & measurements
-
-# These changes describe the operation of the entire system, not a specific file.
+# TMC drivers registers calibration tool (plotter)
+#
+# Copyright (C) 2024  Alexander Fedorov <altzbox@gmail.com>
+# Copyright (C) 2024  Maksim Bolgov <maksim8024@gmail.com>
+#
+# This file may be distributed under the terms of the GNU GPLv3 license.
 
 import os
 #################################################################################################################
@@ -27,7 +20,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from datetime import datetime
 
-fclk = 12 # MHz
+FCLK = 12 # MHz
 CUTOFF_RANGE = 5
 
 
@@ -88,7 +81,7 @@ def main():
                             for tpfd in range(args.get('tpfd_min'), args.get('tpfd_max') + 1):
                                 for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
                                     for _ in range(iterations):
-                                        freq = float(round(1/(2*(12+32*toff)*1/(1000000*fclk)+2*1/(1000000*fclk)*16*(1.5**tbl))/1000, 1))
+                                        freq = float(round(1/(2*(12+32*toff)*1/(1000000*FCLK)+2*1/(1000000*FCLK)*16*(1.5**tbl))/1000, 1))
                                         parameters = (f'current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}'
                                                       f'_hend={hend}_tpfd={tpfd}_speed={speed}_freq={freq}kHz')
                                         parameters_list.append(parameters)

@@ -7,7 +7,7 @@
    git clone https://github.com/MRX8024/chopper-resonance-tuner
    bash ~/chopper-resonance-tuner/install.sh
 ```
-If everything went well, you will see folder - `adxl_results` in your printer home directory (printer configuration), into which the calibration results will be placed, as well as an already available macro from the macro panel on the main page of the Fluidd / Mainsail.
+If everything went well, you will see folder - `adxl_results` in your printer home directory (~/printer_data/config), into which the calibration results will be placed, as well as an already available macro from the macro panel on the main page of the Fluidd / Mainsail.
 And if for some reason not, then install [manually](/wiki/manual_install_en.md).
 
 2. Сonnect the accelerometer to the motor by screwing it in, this guarantees accurate vibration measurement.

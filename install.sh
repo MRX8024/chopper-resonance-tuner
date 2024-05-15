@@ -2,7 +2,7 @@
 repo=chopper-resonance-tuner
 
 script_path=$(realpath $(echo $0))
-repo_path=$(dirname $script path)
+repo_path=$(dirname $script_path)
 
 # Сворачивание от root
 if [ "$(id -u)" = "0" ]; then
@@ -83,7 +83,6 @@ fi
 sudo apt update
 sudo apt-get install libatlas-base-dev libopenblas-dev
 # Reuse system libraries
-python -m venv .venv
-source .venv/bin/activate
-
-pip install -r wiki/requirements.txt
+python -m venv --system-site-packages $repo_path/.venv
+source $repo_path/.venv/bin/activate
+pip install -r $repo_path/wiki/requirements.txt

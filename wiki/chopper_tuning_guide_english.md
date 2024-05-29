@@ -49,9 +49,9 @@ Description of the program functionality -
 
 The values `'default'` in parameters mean that if there is no argument, this variable will assign the default parameters from printer.cfg, or calculate the minimum required ones.
 
-1. `AXIS` - direction `(X/Y/Z)` in which the measurement will be run.
-2. `CURRENT_MIN_MA` and `CURRENT_MAX_MA` - are responsible for changes in the supplied current `(mA)` to stepper motors in 10mA steps. For example, if you have enough torque that the stepper motors produce, you can reduce their current to make the system quieter and reduce motor heating. This function partly allows you to analyze is it worth it, or just choose the current you need in measure.
-3. `TBL_MIN-0` and `TBL_MAX-3`, `TOFF_MIN-1` and `TOFF_MAX-8`, `HSTRT_MIN-0` and `HSTRT_MAX-7`, `HEND_MIN-0` and `HEND_MAX-15`, `TPFD_MIN-0` and `TPFD_MAX-15` are actually also responsible for enumerating parameters, in this case, registers of driver pairs. Their range of work and search is indicated.
+1. `AXIS` - direction `X/Y/Z` in which the measurement will be run.
+2. `CURRENT_MIN_MA` and `CURRENT_MAX_MA` - are responsible for changes in the supplied current (mA) to stepper motors in 25mA steps. For example, if you have enough torque that the stepper motors produce, you can reduce their current to make the system quieter and reduce motor heating. This function partly allows you to analyze is it worth it, or just choose the current you need in measure.
+3. `TBL_MIN-0` and `TBL_MAX-3`, `TOFF_MIN-1` and `TOFF_MAX-8`, `HSTRT_MIN-0` and `HSTRT_MAX-7`, `HEND_MIN-0` and `HEND_MAX-15`, `TPFD_MIN-0` and `TPFD_MAX-15` are actually also responsible for enumerating parameters, in this case, registers of driver/s. Their range of work and search is indicated.
 4. `HSTRT_HEND_MAX-16` - limit on the sum of `HSTRT and HEND`, change is undesirable. ([more](https://www.analog.com/media/en/technical-documentation/data-sheets/TMC5160A_datasheet_rev1.17.pdf))
 5. `MIN_SPEED` and `MAX_SPEED` - enumerate the speed range, with a step of `SPEED_CHANGE_STEP`. By default, it is calculated based on the required rpm by gear ratios.
 6. `ITERATIONS` - the number of repetitions of measurements, for more accurate data.

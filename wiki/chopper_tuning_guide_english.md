@@ -11,7 +11,7 @@ If everything went well, you will see folder - `adxl_results` in your printer ho
 And if for some reason not, then install [manually](/wiki/manual_install_en.md).
 
 2. Сonnect the accelerometer to the motor by screwing it in, this guarantees accurate vibration measurement.
-   However, it is possible to connect, as for example when measuring resonances, for input_shaper - to the print head / bed, depending on the type of printer, to collect vibrations.
+   However, it is possible to connect, as for example when measuring resonances, for input_shaper - to the print head / bed, depending on the type of printer, selected measuring axis, to collect vibrations.
    This method may give incorrect data if the mechanics are crooked, but on properly assembled printers, it is not inferior to the first.
 
 3. Calibration: (Further commands in this article will be interpreted with the minimum required parameters, all supported are listed at the bottom of the manual).
@@ -21,7 +21,7 @@ And if for some reason not, then install [manually](/wiki/manual_install_en.md).
    ![](/wiki/pictures/img_1.png)
    The graph will usually show 2 peaks, at a speed of about 50mm/s and 100mm/s - these are resonant speeds, we need the lowest of these speeds, for example, 55mm/s.
    3. Run the macro to iterate through all the chopper options at the previously selected speed, the command will look like this
-   -`CHOPPER_TUNE MIN_SPEED=55 MAX_SPEED=55`. Check the availability of free space on the host, possible tmp folder limit on hosts with 1GB of RAM, about ~700mb is required for data.
+   -`CHOPPER_TUNE MIN_SPEED=55 MAX_SPEED=55`. **Check the availability of free space on the host**, possible /tmp folder limit on hosts with 1GB of RAM, about ~700mb is required for data.
    The data collection time will take approximately two hours (depending on kinematics), after completion we open the graph in the same way as the previous time, we get a graph of the form -
    ![](/wiki/pictures/img_2.png)
    In this example, the minimum vibrations are at TBL=0 and TOFF=8. Let's enlarge this area.
@@ -49,11 +49,11 @@ Description of the program functionality -
 
 The values `'default'` in parameters mean that if there is no argument, this variable will assign the default parameters from printer.cfg, or calculate the minimum required ones.
 
-1. `AXIS` - direction `(X/Y)` in which the measurement will be run.
+1. `AXIS` - direction `(X/Y/Z)` in which the measurement will be run.
 2. `CURRENT_MIN_MA` and `CURRENT_MAX_MA` - are responsible for changes in the supplied current `(mA)` to stepper motors in 10mA steps. For example, if you have enough torque that the stepper motors produce, you can reduce their current to make the system quieter and reduce motor heating. This function partly allows you to analyze is it worth it, or just choose the current you need in measure.
 3. `TBL_MIN-0` and `TBL_MAX-3`, `TOFF_MIN-1` and `TOFF_MAX-8`, `HSTRT_MIN-0` and `HSTRT_MAX-7`, `HEND_MIN-0` and `HEND_MAX-15`, `TPFD_MIN-0` and `TPFD_MAX-15` are actually also responsible for enumerating parameters, in this case, registers of driver pairs. Their range of work and search is indicated.
 4. `HSTRT_HEND_MAX-16` - limit on the sum of `HSTRT and HEND`, change is undesirable. ([more](https://www.analog.com/media/en/technical-documentation/data-sheets/TMC5160A_datasheet_rev1.17.pdf))
-5. `MIN_SPEED` and `MAX_SPEED` - enumerate the speed range, with a step of `1mm/s`.
+5. `MIN_SPEED` and `MAX_SPEED` - enumerate the speed range, with a step of `SPEED_CHANGE_STEP`. By default, it is calculated based on the required rpm by gear ratios.
 6. `ITERATIONS` - the number of repetitions of measurements, for more accurate data.
 7. `TRAVEL_DISTANCE` - distance `(mm)` of the print head movement during which vibrations are read. By default, is calculated based on the printer's capabilities and measurement time.
 8. `ACCELEROMETER` - an accelerometer that will be used to measure vibrations, auto will be detected if one is specified in the `resonance_tester` configuration, otherwise, without specifying will be applied `adxl345`.

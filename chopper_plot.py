@@ -79,11 +79,12 @@ def main():
                     for hend in range(args.get('hend_min'), args.get('hend_max') + 1):
                         if hstrt + hend <= args.get('hstrt_hend_max'):
                             for tpfd in range(args.get('tpfd_min'), args.get('tpfd_max') + 1):
-                                for speed in range(args.get('min_speed'), args.get('max_speed') + 1):
+                                for speed in range(args.get('min_speed'), args.get('max_speed') + 1,
+                                                   args.get('speed_change_step')):
                                     for _ in range(iterations):
                                         freq = float(round(1/(2*(12+32*toff)*1/(1000000*FCLK)+2*1/(1000000*FCLK)*16*(1.5**tbl))/1000, 1))
                                         parameters = (f'current={current}_tbl={tbl}_toff={toff}_hstrt={hstrt}'
-                                                      f'_hend={hend}_tpfd={tpfd}_speed={speed}_freq={freq}kHz')
+                                                      f'_hend={hend}_tpfd={tpfd}_speed={speed/100}_freq={freq}kHz')
                                         parameters_list.append(parameters)
 
     # Check input count csvs

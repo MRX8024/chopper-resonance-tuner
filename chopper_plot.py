@@ -6,12 +6,12 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 
-import os
 #################################################################################################################
-RESULTS_FOLDER = os.path.expanduser('~/printer_data/config/adxl_results/chopper_magnitude')
+RESULTS_FOLDER = '~/printer_data/config/adxl_results/chopper_magnitude'
 DATA_FOLDER = '/tmp'
 #################################################################################################################
 
+import os
 import sys
 import csv
 import numpy as np
@@ -20,6 +20,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from datetime import datetime
 
+RESULTS_FOLDER = os.path.expanduser(RESULTS_FOLDER)
 FCLK = 12 # MHz
 CUTOFF_RANGE = 5
 
@@ -96,20 +97,23 @@ def main():
 
     # Binding magnitude on registers
     results = []
-    static = calculate_static_measures(os.path.join(DATA_FOLDER, target_file))
     datapoint = []
+    empty_error = 0
+    static = calculate_static_measures(os.path.join(DATA_FOLDER, target_file))
     for csv_file, parameters in tqdm(zip(csv_files, parameters_list), desc='Processing CSV files', total=len(csv_files)):
         file_path = os.path.join(DATA_FOLDER, csv_file)
         with open(file_path, 'r') as file:
-            data = np.array([[float(row["accel_x"]),
-                              float(row["accel_y"]),
-                              float(row["accel_z"])] for row in csv.DictReader(file)]) - static
-
-        trim_size = len(data) // CUTOFF_RANGE
-        data = data[trim_size:-trim_size]
-        md_magnitude = np.median([np.linalg.norm(row) for row in data])
+            try:
+                data = np.array([[float(row["accel_x"]),
+                                  float(row["accel_y"]),
+                                  float(row["accel_z"])] for row in csv.DictReader(file)]) - static
+                trim_size = len(data) // CUTOFF_RANGE
+                data = data[trim_size:-trim_size]
+                md_magnitude = np.median([np.linalg.norm(row) for row in data])
+            except:
+                empty_error += 1
+                md_magnitude = 0
         datapoint.append(md_magnitude)
-
         if len(datapoint) == iterations:
             toff = int(parameters.split('_')[2].split('=')[1])
             results.append({'file_name': csv_file, 'median magnitude': np.mean(datapoint),
@@ -144,6 +148,7 @@ def main():
     # Export Info
     try: print(f'Access to interactive plot at: {"/".join(plot_html_path.split("/")[:-1] + [plot_html_path.split(names[1])[1]])}')
     except IndexError: print(f'Access to interactive plot at: {plot_html_path}')
+    if empty_error: print(f'Warning!!! Empty data cells detected ({empty_error}), make sure you dont run out of memory')
 
 
 if __name__ == '__main__':

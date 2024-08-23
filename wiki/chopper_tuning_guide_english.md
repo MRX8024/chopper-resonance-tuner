@@ -59,3 +59,4 @@ The values `'default'` in parameters mean that if there is no argument, this var
 8. `ACCELEROMETER` - an accelerometer that will be used to measure vibrations, auto will be detected if one is specified in the `resonance_tester` configuration, otherwise, without specifying will be applied `adxl345`.
 9. `FIND_VIBRATIONS` - mode for measuring vibrations from speed, useful in order to remove resonant speeds from everyday printing, as for step 3.1 of this article, applies registers from printer configuration. Values - `(True / False), (1 / 0)`
 10. `RUN_PLOTTER` - run the graph generation script. Values - `(True / False), (1 / 0)`
+11. 

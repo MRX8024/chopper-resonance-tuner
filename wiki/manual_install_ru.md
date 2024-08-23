@@ -13,7 +13,7 @@
 [respond]
 [include chopper_tune.cfg]
 ```
-Если вы использовали нестандартные пути, не забудьте поправить их в `chopper_plot.py`, `chopper_plot.sh`, `[gcode_shell_command chop_tune] в chopper_tune.cfg`
+Если вы использовали НЕ стандартные пути, не забудьте поправить их в `chopper_plot.py`, `[gcode_shell_command chop_tune] в chopper_tune.cfg`
 
 Также, по желанию, можно добавить раздел обновления в moonraker для последующих обновлений через ведморду в разделе обновлений.
 ```

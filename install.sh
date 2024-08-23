@@ -1,11 +1,13 @@
 #!/bin/bash
 repo=chopper-resonance-tuner
-repo_path=~/chopper-resonance-tuner/
+
+script_path=$(realpath $(echo $0))
+repo_path=$(dirname $script_path)
 
 # Сворачивание от root
 if [ "$(id -u)" = "0" ]; then
     echo "Script must run from non-root !!!"
-    exit
+    exit 1
 fi
 
 result_folder=~/printer_data/config/adxl_results/chopper_magnitude
@@ -18,9 +20,9 @@ g_shell_path=~/klipper/klippy/extras/
 g_shell_name=gcode_shell_command.py
 # Перемещение gcode_shell_command.py
 if [ -f "$g_shell_path/$g_shell_name" ]; then # Проверка файла в папке
-     echo "Including $g_shell_name aborted, $g_shell_name already exists in $g_shell_path"
+    echo "Including $g_shell_name aborted, $g_shell_name already exists in $g_shell_path"
 else
-    sudo cp "$repo_path/$g_shell_name" $g_shell_path # Копирование
+    cp "$repo_path/$g_shell_name" $g_shell_path # copy
     # echo "Copying $g_shell_name to $g_shell_path successfully complete"
 fi
 
@@ -28,7 +30,7 @@ cfg_name=chopper_tune.cfg
 cfg_path=~/printer_data/config/
 cfg_incl_path=~/printer_data/config/printer.cfg
 
-ln -sf "$repo_path/$cfg_name" $cfg_path # Перезапись
+ln -srf "$repo_path/$cfg_name" $cfg_path # Перезапись
 
 # Добавление строки [include] в printer.cfg
 if [ -f "$cfg_incl_path" ]; then
@@ -41,6 +43,7 @@ if [ -f "$cfg_incl_path" ]; then
         echo "Including $cfg_name aborted, $cfg_name already exists in $cfg_incl_path"
     fi
 fi
+
 # Добавление строки [respond] в printer.cfg
 if [ -f "$cfg_incl_path" ]; then
     if ! grep -q "^\[respond\]$" "$cfg_incl_path"; then
@@ -78,5 +81,8 @@ if [ -f "$blk_path" ]; then
 fi
 
 sudo apt update
-sudo apt-get install libatlas-base-dev libopenblas-dev
-sudo pip install -r "$repo_path/"wiki/requirements.txt
+sudo apt-get install python3-venv libatlas-base-dev libopenblas-dev
+# Reuse system libraries
+python3 -m venv --system-site-packages $repo_path/.venv
+source $repo_path/.venv/bin/activate
+pip install -r $repo_path/wiki/requirements.txt

@@ -1,3 +1,4 @@
 chopper-resonance-tuner/*
 .idea/*
 *.csv
+.venv

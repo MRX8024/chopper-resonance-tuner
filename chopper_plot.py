@@ -74,7 +74,9 @@ def main():
     samples = {}
     datapoint = []
     empty_error = 0
-    for name in os.listdir(DATA_FOLDER):
+    data_files = sorted(os.listdir(DATA_FOLDER), key=lambda x: os.
+                        path.getmtime(os.path.join(DATA_FOLDER, x)), reverse=True)
+    for name in data_files:
         if name.endswith('__.csv'):
             with open(f'{DATA_FOLDER}{name}', 'r') as file:
                 curr, tbl, toff, hstrt, hend, tpfd, speed, freq, iter = name.split('__')[1].split('_')

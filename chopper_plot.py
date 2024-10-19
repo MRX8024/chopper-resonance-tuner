@@ -42,6 +42,7 @@ def parse_arguments():
     return parsed_args
 
 def calc_static_magnitude(file):
+    next(file)
     data = np.array([
         [float(row["accel_x"]),
          float(row["accel_y"]),
@@ -49,6 +50,7 @@ def calc_static_magnitude(file):
     return np.mean(data, axis=0)
 
 def calc_magnitude(file, static_data):
+    next(file)
     data = np.array([
         [float(row["accel_x"]),
          float(row["accel_y"]),

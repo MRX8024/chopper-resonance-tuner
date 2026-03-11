@@ -1,4 +1,10 @@
-chopper-resonance-tuner/*
+__pycache__
+.DS_Store
+.env
 .idea/*
-*.csv
+.ruff_cache
 .venv
+.vscode
+*.code-workspace
+*.csv
+*.pyc
